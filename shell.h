@@ -196,4 +196,4 @@ void print_syntax_error(cmd_t *cmd, char *input, int i, int bool);
 int check_syntax_error(cmd_t *cmd, char *input);
 
 
-#endif /* SHELL_H */
+#endif
