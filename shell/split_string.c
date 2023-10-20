@@ -71,8 +71,8 @@ void freeWords(char** words, int wordCount)
 	free(words);
 }
 
-int main()
-{
-	printf("programme run successfully\n");
-	return 0;
-}
+//int main()
+//{
+//	printf("programme run successfully\n");
+//	return 0;
+//}

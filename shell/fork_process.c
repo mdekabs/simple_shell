@@ -9,7 +9,7 @@
  * return 0
  */
 int
-main()
+fork()
 {	
 	/* initialization */
 	pid_t my_pid;

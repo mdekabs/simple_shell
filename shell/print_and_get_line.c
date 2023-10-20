@@ -13,7 +13,7 @@
  * ssize_t read;
  **/
 
-int main()
+int printscreen()
 {
 	printf("$ ");
 

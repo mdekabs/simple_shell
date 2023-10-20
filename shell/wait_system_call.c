@@ -9,7 +9,7 @@
  * return 0;
  */
 
-int main()
+void wait_fun()
 {
 	pid_t child_pid;
 	int status;
@@ -18,11 +18,11 @@ int main()
 	if (child_pid == -1)
 	{
 		perror("error processing");
-		return 1;
+//		return 1;
 	}
 	if(child_pid == 0)
 	{
-		printf("wait for me");
+		printf("wait for me\n");
 		sleep(3);
 	}
 	else
@@ -30,5 +30,5 @@ int main()
 		wait(&status);
 		printf("oh, its all better now\n");
 	}
-	return 0;
+//	return 0;
 }

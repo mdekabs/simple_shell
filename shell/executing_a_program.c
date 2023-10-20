@@ -8,7 +8,7 @@
  * return: 0.
  */
 
-int main()
+int execute()
 {
 	char* argv[] = {"/bin/ls", NULL}; /* pointer to array of arguments*/
 	printf("before execve\n");
