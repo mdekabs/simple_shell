@@ -9,7 +9,7 @@
  * return 0;
  */
 
-void wait_fun()
+int wait_fun()
 {
 	pid_t child_pid;
 	int status;
