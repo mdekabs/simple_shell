@@ -15,7 +15,7 @@
 
 int printscreen()
 {
-	printf("$ ");
+	printf("Welcome to my simple shell. Enter your command$ ");
 
 	while(TRUE)
 	{
