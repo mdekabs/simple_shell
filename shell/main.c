@@ -5,7 +5,6 @@
 #include"executing_a_program.c"
 #include"wait_system_call.c"
 #define TRUE 1
-#define ERROR -1
 #define SUCCESSFULL 0
 
 /* create a structure for my commands */
@@ -14,7 +13,7 @@ typedef int (*commandFunction)();
 //define struct
 typedef struct {
 	const char* command;
-	commandFuntion function;
+	commandFunction function;
 } commandMapping;
 
 /* make a list of the commands to map */
@@ -53,7 +52,7 @@ int main()
 					int result = commandMappings[i].function();
 					if (result !=0)
 					{
-						printf("failed execution. \n", words[0]);
+						printf("failed execution. %s\n", words[0]);
 					}
 					break;
 				}
