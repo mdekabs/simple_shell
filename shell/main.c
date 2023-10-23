@@ -19,7 +19,7 @@ int main()
 		{
 			break;
 		}
-		input[strcspn(input, "\n")] == NULL;
+		input[strcspn(input, "\n")] = '\0';
 		words = splitString(input, &wordCount);
 		
 		if(wordCount >0)
