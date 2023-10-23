@@ -5,50 +5,68 @@
 #include"executing_a_program.c"
 #include"wait_system_call.c"
 #define TRUE 1
+#define ERROR -1
+#define SUCCESSFULL 0
+
+/* create a structure for my commands */
+typedef int (*commandFunction)();
+
+//define struct
+typedef struct {
+	const char* command;
+	commandFuntion function;
+} commandMapping;
+
+/* make a list of the commands to map */
+commandMapping commandMappings[] = {
+	{"execute", execute},
+	{"fork", fork},
+	{"wait_fun", wait_fun}
+};
+
 
 int main()
 {
-	char input[1024];
+	char* input = NULL;
 	char **words;
 	int wordCount;
+	int i;
 	
-	while(TRUE)
+	while (TRUE)
 	{
 		printscreen();
-		if (fgets(input, sizeof(input), stdin) == NULL)
+		if (getline(&input, &(size_t){0}, stdin) == ERROR)
 		{
 			break;
 		}
 		input[strcspn(input, "\n")] = '\0';
 		words = splitString(input, &wordCount);
-		
-		if(wordCount >0)
-		{
-			if(strcmp(words[0], "execute") == 0)
+
+
+		if (wordCount > 0) {
+			int commandFound = 0;
+			for (i = 0; i < sizeof(commandMappings) / sizeof(commandMappings[0]); i++)
 			{
-				execute();
+				if(strcmp(words[0], commandMappings[i].command) == 0)
+				{
+					commandFound = 1;
+					int result = commandMappings[i].function();
+					if (result !=0)
+					{
+						printf("failed execution. \n", words[0]);
+					}
+					break;
+				}
 			}
-			else if (strcmp(words[0], "fork") == 0)
+			if (!commandFound)
 			{
-				fork();
-			}
-			else if(strcmp(words[0], "wait_fun") == 0)
-			{
-				wait_fun();
-			}
-			else if (strcmp(words[0], "exit") == 0)
-			{
-				break;
-			}
-			else
-			{
-				printf("no command found: '%s\n'", words[0]);
+				printf("No command:  '%s'\n", words[0]);
 			}
 		}
 
 		freeWords(words, wordCount);
 	}
-	printf("exiting shell...\n");
-
+	free(input);
+	printf("exiting shell ....\n");
 	return 0;
 }
