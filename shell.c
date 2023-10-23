@@ -4,15 +4,22 @@
 #include<sys/wait.h>
 #include<sys/types.h>
 #include<unistd.h>
+#include "tokenizer.h"
+#include "tokenizer.c"
+#define MAX_ARGUMENTS 10
 #define MAX_LEN 100
 #define TRUE 1
 #define UNSUCCESSFULL 1
 #define SUCCESSFULL 0
+
 extern char **environ;
 
 int main()
 {
 	char command[MAX_LEN];
+	char *arguments[MAX_ARGUMENTS];
+
+
 	while(TRUE)
 	{
 		printf("welcome to my shell> ");
@@ -29,7 +36,10 @@ int main()
 		{
 			command[len - 1] = '\0';
 		}
+		/* parse the arguement */
 
+		tokenize(command, arguments, MAX_ARGUMENTS);
+		
 		/* execute command */
 		pid_t child_pid = fork();
 		if(child_pid == 0)
