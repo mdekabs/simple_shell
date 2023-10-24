@@ -43,7 +43,13 @@ int main()
 		/* check if command is "exit" then call the function */
 		if (strcmp(command, "exit") == 0)
 		{
-			handle_exit();
+			exit(UNSUCCESSFULL);
+		}
+
+		/* check if command in env then call the function */
+		if (strcmp(command, "env") == 0)
+		{
+			print_environment();
 		}
 
 		/* parse the arguement */
