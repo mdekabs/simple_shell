@@ -6,6 +6,8 @@
 #include<unistd.h>
 #include "tokenizer.h"
 #include "tokenizer.c"
+#include "pathfinder.c"
+#include "pathfinder.h"
 #define MAX_ARGUMENTS 10
 #define MAX_LEN 100
 #define TRUE 1
@@ -39,7 +41,14 @@ int main()
 		/* parse the arguement */
 
 		tokenize(command, arguments, MAX_ARGUMENTS);
-		
+
+		char *executable = pathfinder(command);
+
+		if(executable == NULL)
+		{
+			fprintf(stderr, "simple_shell: command not found: %s\n", command);
+			continue;
+		}
 		/* execute command */
 		pid_t child_pid = fork();
 		if(child_pid == 0)
@@ -61,6 +70,7 @@ int main()
 			int status;
 			wait(&status);
 		}
+		free(executable);
 	}
 	return SUCCESSFULL;
 }
