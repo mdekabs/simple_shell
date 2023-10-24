@@ -8,6 +8,7 @@
 #include "tokenizer.c"
 #include "pathfinder.c"
 #include "pathfinder.h"
+#include "env.h"
 #define MAX_ARGUMENTS 10
 #define MAX_LEN 100
 #define TRUE 1
@@ -38,6 +39,13 @@ int main()
 		{
 			command[len - 1] = '\0';
 		}
+
+		/* check if command is "exit" then call the function */
+		if (strcmp(command, "exit") == 0)
+		{
+			handle_exit();
+		}
+
 		/* parse the arguement */
 
 		tokenize(command, arguments, MAX_ARGUMENTS);
