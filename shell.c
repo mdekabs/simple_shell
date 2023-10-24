@@ -42,7 +42,7 @@ int main()
 
 		tokenize(command, arguments, MAX_ARGUMENTS);
 
-		char *executable = pathfinder(command);
+		char *executable = pathfinder(arguments[0]);
 
 		if(executable == NULL)
 		{
@@ -54,7 +54,7 @@ int main()
 		if(child_pid == 0)
 		{
 			char *argv[] = {command, NULL};
-			execve(command, argv, environ);
+			execve(command, arguments, environ);
 
 			fprintf(stderr, "simple_shell: command not found: %s\n", command);
 			exit(UNSUCCESSFULL);
